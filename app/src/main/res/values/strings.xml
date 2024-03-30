@@ -3,4 +3,10 @@
     <string name="button_login_text">Login</string>
     <string name="editTextHint_password">Password</string>
     <string name="editTextHint_username">Username</string>
+    <string name="NameApp">SIGT</string>
+    <string name="user_main">Usuario</string>
+    <string name="product_main">Productos</string>
+    <string name="sale_main">Ventas</string>
+    <string name="shopping_main">Compras y gastos</string>
+    <string name="employees_main">Empleados</string>
 </resources>

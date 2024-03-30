@@ -1,13 +1,12 @@
-package com.main.storesoftware
+package com.example.storesoftware.ui.sale
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.storesoftware.R
 
-class LogInActivity : AppCompatActivity() {
+class CreateSaleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.hide()
-        setContentView(R.layout.activity_log_in)
+        setContentView(R.layout.activity_create_sale)
     }
 }
