@@ -9,12 +9,12 @@
     android:orientation="vertical"
     android:paddingHorizontal="10dp"
     android:paddingVertical="15dp"
-    tools:context="com.main.storesoftware.LogInActivity">
+    tools:context=".ui.user.LogInActivity">
 
-    <EditText
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="APP TITLE"
+        android:text="@string/NameApp"
         android:layout_margin="5dp"
         android:textColor="@color/backgroundButton_neutral_darkTheme"
         android:textStyle="bold"

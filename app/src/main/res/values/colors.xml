@@ -12,5 +12,7 @@
     <color name="backgroundApp_darkTheme">#252525</color>
     <color name="backgroundEditText_darkTheme">#171717</color>
     <color name="backgroundButton_neutral_darkTheme">#02798E</color>
+    <color name="title_darkTheme">#AEAFB1</color>
     <color name="textColor_darkTheme">#919191</color>
+    <color name="cardview_darkTheme">#393C4C</color>
 </resources>

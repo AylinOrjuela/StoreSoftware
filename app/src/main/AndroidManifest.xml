@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <application
         android:allowBackup="true"
@@ -11,10 +11,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StoreSoftware"
-        tools:targetApi="31" >
+        tools:targetApi="31">
         <activity
-            android:name="com.main.storesoftware.LogInActivity"
-            android:exported="true" >
+            android:name=".ui.shopping.CreatePurchasesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.sale.CreateSaleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.product.CreateProductActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.home.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.user.LogInActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
