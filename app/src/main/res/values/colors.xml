@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- DARK THEME COLORS -->
+    <color name="backgroundApp_darkTheme">#252525</color>
+    <color name="backgroundEditText_darkTheme">#171717</color>
+    <color name="backgroundButton_neutral_darkTheme">#02798E</color>
+    <color name="textColor_darkTheme">#919191</color>
 </resources>

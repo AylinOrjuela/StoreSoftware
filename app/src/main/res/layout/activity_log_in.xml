@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundApp_darkTheme"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingHorizontal="10dp"
+    android:paddingVertical="15dp"
+    tools:context="com.main.storesoftware.LogInActivity">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="APP TITLE"
+        android:layout_margin="5dp"
+        android:textColor="@color/backgroundButton_neutral_darkTheme"
+        android:textStyle="bold"
+        android:textSize="35sp"
+        android:textAlignment="center"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilUsername"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:hint="@string/editTextHint_username"
+        android:padding="5dp"
+        android:textColorHint="@color/textColor_darkTheme"
+        app:boxBackgroundColor="@color/backgroundEditText_darkTheme"
+        app:startIconDrawable="@drawable/user_icon">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tieUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:inputType="text"
+            android:maxLength="30"
+            android:textColor="@color/textColor_darkTheme"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPassword"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:hint="@string/editTextHint_password"
+        android:padding="5dp"
+        android:textColorHint="@color/textColor_darkTheme"
+        app:boxBackgroundColor="@color/backgroundEditText_darkTheme"
+        app:endIconMode="password_toggle"
+        app:startIconDrawable="@drawable/lock_icon">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiePassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:inputType="textPassword"
+            android:maxLength="30"
+            android:textColor="@color/textColor_darkTheme"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:backgroundTint="@color/backgroundButton_neutral_darkTheme"
+        android:text="@string/button_login_text"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        app:cornerRadius="5dp" />
+
+
+</LinearLayout>
