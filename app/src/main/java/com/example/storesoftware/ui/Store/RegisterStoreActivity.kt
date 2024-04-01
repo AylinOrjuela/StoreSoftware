@@ -32,6 +32,8 @@ class RegisterStoreActivity : AppCompatActivity() {
             store?.let {
                 if (it.name.isNotEmpty() && it.address.isNotEmpty()){
                     goToMain()
+                }else{
+                    binding.btnRegisterStore.isEnabled = true
                 }
             } ?: run {
                 binding.btnRegisterStore.isEnabled = true

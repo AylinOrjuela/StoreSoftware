@@ -9,6 +9,7 @@ data class StoreResponse(
 ){
     fun toDomain():Store{
         return Store(
+            id = id,
             name = name,
             address = address
         )
