@@ -84,6 +84,16 @@
         android:textSize="20sp"
         android:textColor="@color/black"
         app:cornerRadius="5dp" />
-
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRegisterUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:backgroundTint="@color/cardview_dark_background"
+        android:text="@string/button_register_text"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        app:cornerRadius="5dp" />
 
 </LinearLayout>

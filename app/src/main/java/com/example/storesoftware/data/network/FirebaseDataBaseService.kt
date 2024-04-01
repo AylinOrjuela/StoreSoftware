@@ -1,9 +1,6 @@
 package com.example.storesoftware.data.network
 
-import com.example.storesoftware.data.response.ProductResponse
 import com.example.storesoftware.data.response.StoreResponse
-import com.example.storesoftware.data.response.TopProductsResponse
-import com.example.storesoftware.domain.model.Product
 import com.example.storesoftware.domain.model.Store
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
