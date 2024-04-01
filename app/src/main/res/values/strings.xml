@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">StoreSoftware</string>
     <string name="button_login_text">Ingresar</string>
+    <string name="button_register_text">Registrar usuario</string>
     <string name="editTextHint_password">Contraseña</string>
     <string name="editTextHint_username">Nombre de usuario</string>
     <string name="NameApp">SIGT</string>
