@@ -14,6 +14,9 @@
         android:theme="@style/Theme.StoreSoftware"
         tools:targetApi="31">
         <activity
+            android:name=".ui.user.ConsultUserActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.Store.RegisterStoreActivity"
             android:exported="false" />
         <activity
