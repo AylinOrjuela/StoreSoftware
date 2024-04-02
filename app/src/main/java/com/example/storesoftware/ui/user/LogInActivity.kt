@@ -47,6 +47,11 @@ class LogInActivity : AppCompatActivity() {
                 }
             }
         }
+        binding.btnRegisterUser.setOnClickListener {
+            val intent = Intent(this, RegisterUserActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun checkEmptyFields(): Boolean {

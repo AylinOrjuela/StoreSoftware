@@ -37,7 +37,7 @@ class FirebaseDataBaseService @Inject constructor(private val firestore: Firebas
         return firestore.collection(APP_COLLECTION).orderBy("id", Query.Direction.DESCENDING)
             .limit(1).get().await().firstOrNull()?.toObject(StoreResponse::class.java)?.toDomain()
     }
-
+    //Funcion para registrar tienda
     fun uploadNewStore(name: String, address: String) {
         val id = generateStoreId()
         val store = hashMapOf(
@@ -46,6 +46,51 @@ class FirebaseDataBaseService @Inject constructor(private val firestore: Firebas
             "address" to address
         )
         firestore.collection(APP_COLLECTION).document(STORE_DOCUMENT).set(store)
+    }
+
+    // Función para actualizar la tienda
+    fun updateStore(id: String, name: String, address: String) {
+        val store = hashMapOf(
+            "id" to id,
+            "name" to name,
+            "address" to address
+        )
+        firestore.collection(APP_COLLECTION).document(STORE_DOCUMENT).set(store)
+            .addOnSuccessListener {
+                println("Tienda actualizada correctamente")
+            }
+            .addOnFailureListener { e ->
+                println("Error al actualizar la tienda: $e")
+            }
+    }
+
+    // Función para consultar la tienda por ID
+    fun getStoreById(storeId: String) {
+        firestore.collection(APP_COLLECTION).document(STORE_DOCUMENT).get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    val id = document.getString("id")
+                    val name = document.getString("name")
+                    val address = document.getString("address")
+                    println("ID: $id, Nombre: $name, Dirección: $address")
+                } else {
+                    println("No se encontró la tienda con el ID proporcionado")
+                }
+            }
+            .addOnFailureListener { e ->
+                println("Error al obtener la tienda: $e")
+            }
+    }
+
+    //Funcion para Eliminar tienda
+    fun deleteStore(storeId: String) {
+        firestore.collection(APP_COLLECTION).document(storeId).delete()
+            .addOnSuccessListener {
+                println("Tienda con ID $storeId eliminada correctamente")
+            }
+            .addOnFailureListener { e ->
+                println("Error al eliminar la tienda: $e")
+            }
     }
 
     private fun generateStoreId(): String {

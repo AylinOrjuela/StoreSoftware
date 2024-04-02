@@ -84,6 +84,7 @@
         android:textSize="20sp"
         android:textColor="@color/black"
         app:cornerRadius="5dp" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnRegisterUser"
         android:layout_width="match_parent"
