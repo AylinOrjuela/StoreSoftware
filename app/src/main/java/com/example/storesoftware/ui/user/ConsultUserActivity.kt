@@ -9,7 +9,6 @@ import com.example.storesoftware.domain.model.User
 class ConsultUserActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityConsultUserBinding
-    private val user = User.instance
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
@@ -24,8 +23,6 @@ class ConsultUserActivity : AppCompatActivity() {
     }
 
     private fun initListeners() {
-        binding.nameUser.text = user.firstName
-        binding.firstName.setText(user.firstName)
-        binding.lastName.setText(user.lastName)
+
     }
 }

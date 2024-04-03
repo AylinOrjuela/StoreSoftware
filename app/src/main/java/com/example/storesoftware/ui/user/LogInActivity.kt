@@ -25,6 +25,7 @@ class LogInActivity : AppCompatActivity() {
         setContentView(binding.root)
         initUI()
     }
+
     private fun initUI() {
         initListeners()
     }
@@ -35,15 +36,15 @@ class LogInActivity : AppCompatActivity() {
                 val username = binding.tieUsername.text.toString()
                 val password = binding.tiePassword.text.toString()
 
-                val loginSuccessful = logInViewModel.loginAdmin(username, password)
-
-                if (loginSuccessful) {
-                    val intent = Intent(this, RegisterStoreActivity::class.java)
-
-                    startActivity(intent)
-                    finish()
-                } else {
-                    Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
+                logInViewModel.loginUser(username, password) {
+                    if (it.isNotEmpty() && it.isNotBlank()) {
+                        val intent = Intent(this, RegisterStoreActivity::class.java)
+                        intent.putExtra("userId", it)
+                        startActivity(intent)
+                        finish()
+                    } else {
+                        Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }

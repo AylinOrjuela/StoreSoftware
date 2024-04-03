@@ -2,17 +2,20 @@ package com.example.storesoftware.data.network
 
 import com.example.storesoftware.data.response.StoreResponse
 import com.example.storesoftware.domain.model.Store
+import com.example.storesoftware.domain.model.User
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.coroutines.tasks.await
 import java.util.Date
 import javax.inject.Inject
+import javax.security.auth.callback.Callback
 
 class FirebaseDataBaseService @Inject constructor(private val firestore: FirebaseFirestore) {
 
     companion object {
         const val APP_COLLECTION = "App"
         const val STORE_DOCUMENT = "Store"
+        const val USER_COLLECTION = "Users"
     }
 
 //    suspend fun getAllProducts(): List<Product> {
@@ -37,6 +40,7 @@ class FirebaseDataBaseService @Inject constructor(private val firestore: Firebas
         return firestore.collection(APP_COLLECTION).orderBy("id", Query.Direction.DESCENDING)
             .limit(1).get().await().firstOrNull()?.toObject(StoreResponse::class.java)?.toDomain()
     }
+
     //Funcion para registrar tienda
     fun uploadNewStore(name: String, address: String) {
         val id = generateStoreId()
@@ -95,6 +99,49 @@ class FirebaseDataBaseService @Inject constructor(private val firestore: Firebas
 
     private fun generateStoreId(): String {
         return Date().time.toString()
+    }
+
+    fun setNewUser(
+        firstName: String,
+        lastName: String,
+        cc: String,
+        username: String,
+        password: String,
+        code: String
+    ) {
+        val id = generateStoreId()
+
+        val user = hashMapOf(
+            "id" to id,
+            "firstName" to firstName,
+            "lastName" to lastName,
+            "cc" to cc,
+            "username" to username,
+            "password" to password,
+            "code" to code
+        )
+        firestore.collection(USER_COLLECTION).document(id).set(user)
+    }
+
+    fun findUserByCredentials(username: String, password: String, callback: (String) -> Unit) {
+        firestore.collection(USER_COLLECTION).whereEqualTo("username", username).get()
+            .continueWith { task ->
+                val querySnapshot = task.result
+
+                if (querySnapshot != null && !querySnapshot.isEmpty) {
+                    val userDoc = querySnapshot.documents[0]
+                    val storedPassword = userDoc.getString("password")
+
+                    if (storedPassword == password) {
+                        callback(userDoc.id)
+                    } else {
+                        callback("")
+                    }
+                } else {
+                    callback("")
+                }
+
+            }
     }
 
 }
