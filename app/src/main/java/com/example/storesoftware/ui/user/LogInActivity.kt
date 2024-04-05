@@ -46,6 +46,7 @@ class LogInActivity : AppCompatActivity() {
                         Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
                     }
                 }
+
             }
         }
         binding.btnRegisterUser.setOnClickListener {

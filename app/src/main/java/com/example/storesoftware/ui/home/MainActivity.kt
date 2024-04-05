@@ -17,17 +17,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
         binding = ActivityMainBinding.inflate(layoutInflater)
+        val user = intent.extras?.getString("userId")
         setContentView(binding.root)
-        initUI()
+        initUI(user.toString())
     }
 
-    private fun initUI() {
-        initListeners()
+    private fun initUI(user:String) {
+        initListeners(user)
     }
 
-    private fun initListeners() {
+    private fun initListeners(user:String) {
         binding.user.setOnClickListener {
             val intent = Intent(this, ConsultUserActivity::class.java)
+            intent.putExtra("userId", user)
             startActivity(intent)
             finish()
         }

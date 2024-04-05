@@ -22,16 +22,19 @@ class RegisterStoreActivity : AppCompatActivity() {
         supportActionBar?.hide()
         binding = ActivityRegisterStoreBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        checkExistingStore()
-        initUI()
+
+        val user = intent.extras?.getString("userId")
+
+        checkExistingStore(user.toString())
+        initUI(user.toString())
     }
-    private fun checkExistingStore(){
+    private fun checkExistingStore(user:String){
         binding.btnRegisterStore.isEnabled = false
         lifecycleScope.launch {
             val store = registerStoreViewModel.onAlreadyRegisterStore()
             store?.let {
                 if (it.name.isNotEmpty() && it.address.isNotEmpty()){
-                    goToMain()
+                    goToMain(user)
                 }else{
                     binding.btnRegisterStore.isEnabled = true
                 }
@@ -41,16 +44,17 @@ class RegisterStoreActivity : AppCompatActivity() {
         }
     }
 
-    private fun goToMain(){
+    private fun goToMain(user: String){
         val intent = Intent(this,MainActivity::class.java)
+        intent.putExtra("userId", user)
         startActivity(intent)
         finish()
     }
 
-    private fun initUI() {
-        initListeners()
+    private fun initUI(user:String) {
+        initListeners(user)
     }
-    private fun initListeners() {
+    private fun initListeners(user:String) {
 
         binding.tieName.doOnTextChanged { text, _, _, _ ->
             registerStoreViewModel.onNameChanged(text)
@@ -61,9 +65,7 @@ class RegisterStoreActivity : AppCompatActivity() {
 
         binding.btnRegisterStore.setOnClickListener {
             registerStoreViewModel.onRegisterStoreSelected()
-            val intent = Intent(this,MainActivity::class.java)
-            startActivity(intent)
-            finish()
+            goToMain(user)
         }
     }
 }
