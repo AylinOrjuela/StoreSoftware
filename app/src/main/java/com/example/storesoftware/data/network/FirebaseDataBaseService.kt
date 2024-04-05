@@ -1,6 +1,7 @@
 package com.example.storesoftware.data.network
 
 import com.example.storesoftware.data.response.StoreResponse
+import com.example.storesoftware.data.response.UserResponse
 import com.example.storesoftware.domain.model.Store
 import com.example.storesoftware.domain.model.User
 import com.google.firebase.firestore.FirebaseFirestore
@@ -8,7 +9,6 @@ import com.google.firebase.firestore.Query
 import kotlinx.coroutines.tasks.await
 import java.util.Date
 import javax.inject.Inject
-import javax.security.auth.callback.Callback
 
 class FirebaseDataBaseService @Inject constructor(private val firestore: FirebaseFirestore) {
 
@@ -142,6 +142,11 @@ class FirebaseDataBaseService @Inject constructor(private val firestore: Firebas
                 }
 
             }
+    }
+
+    suspend fun getUserById(userId: String): User? {
+        return firestore.collection(USER_COLLECTION).document(userId).get().await()
+            .toObject(UserResponse::class.java)?.toDomain()
     }
 
 }

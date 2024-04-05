@@ -9,16 +9,6 @@
     android:orientation="vertical"
     tools:context=".ui.user.ConsultUserActivity">
 
-    <TextView
-        android:id="@+id/nameUser"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:text="User"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="25sp" />
-
     <androidx.cardview.widget.CardView
         android:layout_width="200dp"
         android:layout_height="200dp"
@@ -36,8 +26,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="15dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="15dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -46,23 +36,26 @@
             android:layout_weight="2"
             android:text="Nombres :"
             android:textAlignment="textEnd"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/firstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            tools:text="asdasd"
-            android:textColor="@color/white"/>
+            android:clickable="false"
+            android:focusable="false"
+            android:textColor="@color/white"
+            tools:text="asdasd" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="15dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="15dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -71,15 +64,75 @@
             android:layout_weight="2"
             android:text="Apellidos :"
             android:textAlignment="textEnd"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/lastName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            tools:text="asdasd"
-            android:textColor="@color/white"/>
+            android:clickable="false"
+            android:focusable="false"
+            android:textColor="@color/white"
+            tools:text="asdasd" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="2"
+            android:text="CC :"
+            android:textAlignment="textEnd"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/cc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:focusable="false"
+            android:textColor="@color/white"
+            tools:text="asdasd" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="15dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/backgroundButton_neutral_darkTheme"
+            android:text="Editar"
+            app:cornerRadius="10dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/backgroundButton_neutral_darkTheme"
+            android:text="Volver"
+            app:cornerRadius="10dp" />
+
     </LinearLayout>
 
 

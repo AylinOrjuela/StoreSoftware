@@ -8,7 +8,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterUserViewModel @Inject constructor(private val firebaseDataBaseService: FirebaseDataBaseService) : ViewModel() {
+class RegisterUserViewModel @Inject constructor(private val firebaseDataBaseService: FirebaseDataBaseService) :
+    ViewModel() {
     fun createUser(
         firstName: String,
         lastName: String,
@@ -17,8 +18,8 @@ class RegisterUserViewModel @Inject constructor(private val firebaseDataBaseServ
         password: String,
         code: String
     ) {
-       viewModelScope.launch {
-           firebaseDataBaseService.setNewUser(firstName,lastName,cc,username,password,code)
-       }
+        viewModelScope.launch {
+            firebaseDataBaseService.setNewUser(firstName, lastName, cc, username, password, code)
+        }
     }
 }

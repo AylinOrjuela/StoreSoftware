@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@color/backgroundApp_darkTheme"
+    tools:context=".ui.user.editDeleteUser.EditDeleteUserActivity">
+
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnRegister"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingVertical="15dp"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:backgroundTint="@color/textColor_darkTheme"
+                app:cardCornerRadius="70dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/user_icon" />
+
+            </androidx.cardview.widget.CardView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilName"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:hint="Nombres"
+                android:padding="5dp"
+                android:textColorHint="@color/textColor_darkTheme"
+                app:boxBackgroundColor="@color/backgroundEditText_darkTheme">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tieName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:textColor="@color/textColor_darkTheme"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilLastName"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:hint="Apellidos"
+                android:padding="5dp"
+                android:textColorHint="@color/textColor_darkTheme"
+                app:boxBackgroundColor="@color/backgroundEditText_darkTheme">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tieLastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:textColor="@color/textColor_darkTheme"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilCC"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:hint="Documento de identidad"
+                android:padding="5dp"
+                android:textColorHint="@color/textColor_darkTheme"
+                app:boxBackgroundColor="@color/backgroundEditText_darkTheme">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tieCC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:inputType="number"
+                    android:maxLength="20"
+                    android:textColor="@color/textColor_darkTheme"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilUsername"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:hint="Nombre de usuario"
+                android:padding="5dp"
+                android:textColorHint="@color/textColor_darkTheme"
+                app:boxBackgroundColor="@color/backgroundEditText_darkTheme"
+                app:startIconDrawable="@drawable/user_icon">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tieUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:textColor="@color/textColor_darkTheme"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPassword"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:hint="Contraseña"
+                android:padding="5dp"
+                android:textColorHint="@color/textColor_darkTheme"
+                app:boxBackgroundColor="@color/backgroundEditText_darkTheme"
+                app:endIconMode="password_toggle"
+                app:startIconDrawable="@drawable/lock_icon">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tiePassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:inputType="textPassword"
+                    android:maxLength="30"
+                    android:textColor="@color/textColor_darkTheme"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/backgroundButton_neutral_darkTheme"
+        android:text="Guardar Cambios"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:cornerRadius="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnBack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/backgroundButton_neutral_darkTheme"
+        android:text="Volver"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:cornerRadius="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
