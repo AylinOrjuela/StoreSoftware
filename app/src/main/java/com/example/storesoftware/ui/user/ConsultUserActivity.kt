@@ -18,6 +18,7 @@ class ConsultUserActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityConsultUserBinding
     private val consultUserViewModel: ConsultUserViewModel by viewModels()
+    private var code:String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
@@ -42,6 +43,7 @@ class ConsultUserActivity : AppCompatActivity() {
         binding.btnEdit.setOnClickListener {
             val intent = Intent(this, EditDeleteUserActivity::class.java)
             intent.putExtra("userId",user)
+            intent.putExtra("code",code)
             startActivity(intent)
             finish()
         }
@@ -53,6 +55,7 @@ class ConsultUserActivity : AppCompatActivity() {
             binding.firstName.setText(userData.firstName)
             binding.lastName.setText(userData.lastName)
             binding.cc.setText(userData.cc)
+            code = userData.code
         }
     }
 
