@@ -224,5 +224,34 @@ class FirebaseDataBaseService @Inject constructor(
     private fun generateProductId(): String {
         return Date().time.toString()
     }
+    
+    fun updateUser(user: User) {
+        val userUpdate = hashMapOf(
+            "cc" to user.cc,
+            "code" to user.code,
+            "firstName" to user.firstName,
+            "id" to user.id,
+            "lastName" to user.lastName,
+            "password" to user.password,
+            "username" to user.username
+        )
+        firestore.collection(USER_COLLECTION).document(user.id).set(userUpdate)
+            .addOnSuccessListener {
+                println("Usuario actualizado correctamente")
+            }
+            .addOnFailureListener { e ->
+                println("Error al actualizar el usuario: $e")
+            }
+    }
+
+    fun deleteUser(userId: String) {
+        firestore.collection(USER_COLLECTION).document(userId).delete()
+            .addOnSuccessListener {
+                println("El Usuario ha sido eliminado exitosamente")
+            }
+            .addOnFailureListener { e ->
+                println("Error al eliminar el usuario: $e")
+            }
+    }
 
 }
