@@ -2,6 +2,7 @@ package com.example.storesoftware.data.di
 
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,4 +16,9 @@ object DataModule {
     @Singleton
     @Provides
     fun provideFirestore() = Firebase.firestore
+
+    @Singleton
+    @Provides
+    fun provideStorage() = Firebase.storage
+
 }

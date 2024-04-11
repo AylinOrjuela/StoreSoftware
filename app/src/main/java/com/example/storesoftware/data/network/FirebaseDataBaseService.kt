@@ -1,40 +1,87 @@
 package com.example.storesoftware.data.network
 
+import android.net.Uri
+import com.example.storesoftware.data.response.ProductResponse
 import com.example.storesoftware.data.response.StoreResponse
+import com.example.storesoftware.data.response.TopProductsResponse
 import com.example.storesoftware.data.response.UserResponse
+import com.example.storesoftware.domain.model.Product
 import com.example.storesoftware.domain.model.Store
 import com.example.storesoftware.domain.model.User
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageMetadata
+import com.google.firebase.storage.UploadTask
+import com.google.firebase.storage.ktx.storageMetadata
+import kotlinx.coroutines.CancellableContinuation
+import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.tasks.await
 import java.util.Date
 import javax.inject.Inject
+import kotlin.coroutines.resume
 
-class FirebaseDataBaseService @Inject constructor(private val firestore: FirebaseFirestore) {
+class FirebaseDataBaseService @Inject constructor(
+    private val firestore: FirebaseFirestore,
+    private val storage: FirebaseStorage
+) {
 
     companion object {
         const val APP_COLLECTION = "App"
         const val STORE_DOCUMENT = "Store"
         const val USER_COLLECTION = "Users"
+        const val PRODUCTS_PATH = "products"
+        const val MANAGEMENT_PATH = "management"
+        const val TOP_PRODUCT_DOCUMENT = "top_products"
     }
 
-//    suspend fun getAllProducts(): List<Product> {
-//        return firestore.collection(PRODUCTS_PATH).get().await().map { product ->
-//            product.toObject(ProductResponse::class.java).toDomain()
-//        }
-//    }
-//
-//    suspend fun getLastProduct(): Product? {
-//        return firestore.collection(PRODUCTS_PATH).orderBy("id", Query.Direction.DESCENDING)
-//            .limit(1)
-//            .get().await().firstOrNull()?.toObject(ProductResponse::class.java)?.toDomain()
-//    }
-//
-//    suspend fun getTopProducts(): List<String> {
-//        //Esto es un document Snapshot
-//        return firestore.collection(MANAGEMENT_PATH).document(TOP_PRODUCT_DOCUMENT).get().await()
-//            .toObject(TopProductsResponse::class.java)?.ids ?: emptyList()
-//    }
+    suspend fun getAllProducts(): List<Product> {
+        return firestore.collection(PRODUCTS_PATH).get().await().map { product ->
+            product.toObject(ProductResponse::class.java).toDomain()
+        }
+    }
+
+    suspend fun getLastProduct(): Product? {
+        return firestore.collection(PRODUCTS_PATH).orderBy("id", Query.Direction.DESCENDING)
+            .limit(1)
+            .get().await().firstOrNull()?.toObject(ProductResponse::class.java)?.toDomain()
+    }
+
+    suspend fun getTopProducts(): List<String> {
+        //Esto es un document Snapshot
+        return firestore.collection(MANAGEMENT_PATH).document(TOP_PRODUCT_DOCUMENT).get().await()
+            .toObject(TopProductsResponse::class.java)?.ids ?: emptyList()
+    }
+
+    suspend fun uploadAndDownloadImage(uri: Uri): String {
+        return suspendCancellableCoroutine<String> { suspendCancellable ->
+            val reference = storage.reference.child("download/${uri.lastPathSegment}")
+            reference.putFile(uri, createMetaData()).addOnSuccessListener {
+                downloadImage(it, suspendCancellable)
+            }.addOnFailureListener {
+                suspendCancellable.resume("")
+            }
+        }
+    }
+
+    private fun downloadImage(
+        uploadTask: UploadTask.TaskSnapshot,
+        suspendCancellable: CancellableContinuation<String>
+    ) {
+        uploadTask.storage.downloadUrl.addOnSuccessListener {
+            suspendCancellable.resume(it.toString())
+        }.addOnFailureListener {
+            suspendCancellable.resume("")
+        }
+    }
+
+    private fun createMetaData(): StorageMetadata {
+        val metadata = storageMetadata {
+            contentType = "image/jpg"
+            setCustomMetadata("date", Date().time.toString())
+        }
+        return metadata
+    }
 
     suspend fun getStoreData(): Store? {
         return firestore.collection(APP_COLLECTION).orderBy("id", Query.Direction.DESCENDING)
@@ -147,6 +194,35 @@ class FirebaseDataBaseService @Inject constructor(private val firestore: Firebas
     suspend fun getUserById(userId: String): User? {
         return firestore.collection(USER_COLLECTION).document(userId).get().await()
             .toObject(UserResponse::class.java)?.toDomain()
+    }
+
+    suspend fun uploadNewProduct(
+        name: String,
+        description: String,
+        price: String,
+        stock: Int,
+        imageUrl: String
+    ): Boolean {
+        val id = generateProductId()
+        val product = hashMapOf(
+            "id" to id,
+            "name" to name,
+            "description" to description,
+            "price" to price,
+            "stock" to stock,
+            "imageUrl" to imageUrl
+        )
+        return suspendCancellableCoroutine{ cancellableCorutine ->
+            firestore.collection(PRODUCTS_PATH).document(id).set(product).addOnCompleteListener {
+            cancellableCorutine.resume(true)
+        }.addOnFailureListener {
+            cancellableCorutine.resume(false)
+        } }
+
+    }
+
+    private fun generateProductId(): String {
+        return Date().time.toString()
     }
 
 }

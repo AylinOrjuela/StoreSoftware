@@ -7,7 +7,8 @@ data class ProductResponse(
     val imageUrl: String = "",
     val name: String = "",
     val description: String = "",
-    val price: String = ""
+    val price: String = "",
+    val stock: Int = 0
 ){
     fun toDomain(): Product {
         return Product(
@@ -15,7 +16,8 @@ data class ProductResponse(
             imageUrl = imageUrl,
             name = name,
             description = description,
-            price = price
+            price = price,
+            stock = stock
         )
     }
 }
