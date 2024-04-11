@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?actionBarSize">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="Productos"/>
+
+    <TextView
+        android:id="@+id/tvAddProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/backgroundButton_neutral_darkTheme"
+        android:layout_gravity="end|center"
+        android:textStyle="bold"
+        android:padding="16dp"
+        android:text="Crear producto"/>
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|center"
+        android:src="@drawable/ic_back"
+        android:padding="16dp"/>
+
+
+</FrameLayout>
