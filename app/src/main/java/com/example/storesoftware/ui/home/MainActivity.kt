@@ -1,11 +1,13 @@
 package com.example.storesoftware.ui.home
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.example.storesoftware.databinding.ActivityMainBinding
+import com.example.storesoftware.ui.product.HomeProduct.MainProductActivity
 import com.example.storesoftware.ui.user.ConsultUserActivity
+import com.example.storesoftware.ui.user.LogInActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,6 +32,17 @@ class MainActivity : AppCompatActivity() {
         binding.user.setOnClickListener {
             val intent = Intent(this, ConsultUserActivity::class.java)
             intent.putExtra("userId", user)
+            startActivity(intent)
+            finish()
+        }
+        binding.btnProduct.setOnClickListener {
+            val intent = Intent(this, MainProductActivity::class.java)
+            intent.putExtra("userId", user)
+            startActivity(intent)
+            finish()
+        }
+        binding.ivBack.setOnClickListener{
+            val intent = Intent(this, LogInActivity::class.java)
             startActivity(intent)
             finish()
         }

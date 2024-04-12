@@ -15,7 +15,7 @@ class ProductsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             Glide.with(binding.tvTitle.context).load(product.imageUrl).into(ivProduct)
             tvTitle.text = product.name
             tvDescription.text = product.description
-            tvPrice.text = "${product.price} $"
+            tvPrice.text = product.stock.toString()
 
         }
     }

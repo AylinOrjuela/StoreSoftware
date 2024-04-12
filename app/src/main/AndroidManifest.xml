@@ -16,14 +16,14 @@
         android:theme="@style/Theme.StoreSoftware"
         tools:targetApi="31">
         <activity
+            android:name=".ui.product.editDeleteProduct.DeleteEditProductActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.product.editDeleteProduct.SelectProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.product.HomeProduct.MainProductActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".ui.user.editDeleteUser.EditDeleteUserActivity"
             android:exported="false" />
@@ -50,13 +50,13 @@
             android:exported="false" />
         <activity
             android:name=".ui.user.LogInActivity"
-            android:exported="false"/>
-    <!--        <intent-filter>
+            android:exported="true">
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter> -->
-
+            </intent-filter>
+        </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -67,7 +67,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/path_provider" />
         </provider>
-
     </application>
 
 </manifest>
