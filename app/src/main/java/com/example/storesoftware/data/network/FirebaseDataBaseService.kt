@@ -40,6 +40,10 @@ class FirebaseDataBaseService @Inject constructor(
             product.toObject(ProductResponse::class.java).toDomain()
         }
     }
+    suspend fun getProductById(ProductId: String): Product? {
+        return firestore.collection(PRODUCTS_PATH).document(ProductId).get().await()
+            .toObject(ProductResponse::class.java)?.toDomain()
+    }
 
     suspend fun getLastProduct(): Product? {
         return firestore.collection(PRODUCTS_PATH).orderBy("id", Query.Direction.DESCENDING)
@@ -196,6 +200,12 @@ class FirebaseDataBaseService @Inject constructor(
             .toObject(UserResponse::class.java)?.toDomain()
     }
 
+    suspend fun checkUserPermissions(userId: String): Boolean {
+        val user = getUserById(userId)
+        val isAdmin = user?.code == "95876"
+        return isAdmin
+    }
+
     suspend fun uploadNewProduct(
         name: String,
         description: String,
@@ -224,6 +234,34 @@ class FirebaseDataBaseService @Inject constructor(
     private fun generateProductId(): String {
         return Date().time.toString()
     }
+    fun deleteProduct(productId: String) {
+        firestore.collection(PRODUCTS_PATH).document(productId).delete()
+            .addOnSuccessListener {
+                println("El producto ha sido eliminado exitosamente")
+            }
+            .addOnFailureListener { e ->
+                println("Error al eliminar el producto: $e")
+            }
+    }
+    fun updateProduct(product: Product) {
+        val productUpdate = hashMapOf(
+            "id" to product.id,
+            "name" to product.name,
+            "description" to product.description,
+            "price" to product.price,
+            "stock" to product.stock,
+            "imageUrl" to product.imageUrl
+        )
+
+        firestore.collection(PRODUCTS_PATH).document(product.id).set(productUpdate)
+            .addOnSuccessListener {
+                println("Producto actualizado correctamente")
+            }
+            .addOnFailureListener { e ->
+                println("Error al actualizar el producto: $e")
+            }
+    }
+
     
     fun updateUser(user: User) {
         val userUpdate = hashMapOf(
