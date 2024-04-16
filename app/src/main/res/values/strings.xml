@@ -14,4 +14,11 @@
     <string name="name_register_store">Nombre de la tienda</string>
     <string name="button_register_store_text">Registrar Tienda</string>
     <string name="title_register_store">Registro de la tienda</string>
+    <string name="title_register_purchase_receipt">REGISTRAR COMPRA</string>
+    <string name="editTextHint_date">Fecha</string>
+    <string name="editTextHint_description">Descripción</string>
+    <string name="editTextHint_units">Unidades</string>
+    <string name="editTextHint_price">Precio</string>
+    <string name="button_register_purchase_receipt">Crear Recibo</string>
+    <string name="button_back">Volver</string>
 </resources>
