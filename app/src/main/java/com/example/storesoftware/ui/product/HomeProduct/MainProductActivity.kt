@@ -1,8 +1,8 @@
 package com.example.storesoftware.ui.product.HomeProduct
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -16,10 +16,12 @@ import com.bumptech.glide.Glide
 import com.example.storesoftware.R
 import com.example.storesoftware.databinding.ActivityMainProductBinding
 import com.example.storesoftware.domain.model.Product
+import com.example.storesoftware.ui.home.MainActivity
 import com.example.storesoftware.ui.product.HomeProduct.adapter.ProductsAdapter
 import com.example.storesoftware.ui.product.HomeProduct.adapter.SpacingDecorator
 import com.example.storesoftware.ui.product.HomeProduct.adapter.TopProductsAdater
 import com.example.storesoftware.ui.product.addproduct.CreateProductActivity
+import com.example.storesoftware.ui.product.editDeleteProduct.SelectProductActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -43,19 +45,33 @@ class MainProductActivity : AppCompatActivity() {
         binding = ActivityMainProductBinding.inflate(layoutInflater)
         setContentView(binding.root)
         mainProductViewModel = ViewModelProvider(this)[MainProductViewModel::class.java]
-        initUI()
+        val user = intent.extras?.getString("userId")
+        mainProductViewModel.checkUserPermissions(user)
+        initUI(user)
     }
 
-    private fun initListeners() {
+    private fun initListeners(user: String?) {
         binding.viewToolBar.tvAddProduct.setOnClickListener {
             createProductLauncher.launch(CreateProductActivity.create(this))
+        }
+        binding.viewToolBar.ivBack.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("userId", user)
+            startActivity(intent)
+            finish()
+        }
+        binding.btnEditDelete.setOnClickListener{
+            val intent = Intent(this, SelectProductActivity::class.java)
+            intent.putExtra("userId", user)
+            startActivity(intent)
+            finish()
         }
 
     }
 
-    private fun initUI() {
+    private fun initUI(user: String?) {
         initShimmer()
-        initListeners()
+        initListeners(user)
         initList()
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -63,6 +79,8 @@ class MainProductActivity : AppCompatActivity() {
                     renderLastProduct(state.lastProduct)
                     renderTopProducts(state.topProducts)
                     renderAllProducts(state.products)
+
+                    binding.btnEditDelete.isEnabled = state.isEditDeleteButtonEnabled
                 }
             }
         }

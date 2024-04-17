@@ -16,7 +16,14 @@
         android:theme="@style/Theme.StoreSoftware"
         tools:targetApi="31">
         <activity
+<<<<<<< HEAD
             android:name=".ui.shopping.Consult.ConsultPurchaseReceiptsActivity"
+=======
+            android:name=".ui.product.editDeleteProduct.DeleteEditProductActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.product.editDeleteProduct.SelectProductActivity"
+>>>>>>> d6c110ea9524d3bd1a459357f5696d45cd938b9c
             android:exported="false" />
         <activity
             android:name=".ui.product.HomeProduct.MainProductActivity"
