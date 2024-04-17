@@ -16,4 +16,5 @@
     <color name="title_darkTheme">#AEAFB1</color>
     <color name="textColor_darkTheme">#919191</color>
     <color name="cardview_darkTheme">#393C4C</color>
+    <color name="cardViewRecycler_darkTheme">#022170</color>
 </resources>

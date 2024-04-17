@@ -16,6 +16,9 @@
         android:theme="@style/Theme.StoreSoftware"
         tools:targetApi="31">
         <activity
+            android:name=".ui.shopping.Consult.ConsultPurchaseReceiptsActivity"
+            android:exported="false"/>
+        <activity
             android:name=".ui.product.editDeleteProduct.DeleteEditProductActivity"
             android:exported="false" />
         <activity
@@ -37,7 +40,7 @@
             android:name=".ui.Store.RegisterStoreActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.shopping.CreatePurchasesActivity"
+            android:name=".ui.shopping.Register.CreatePurchasesActivity"
             android:exported="false" />
         <activity
             android:name=".ui.sale.CreateSaleActivity"
