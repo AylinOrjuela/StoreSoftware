@@ -314,4 +314,37 @@ class FirebaseDataBaseService @Inject constructor(
         }
     }
 
+    suspend fun getBuyReceiptById(receiptId: String): BuyReceipt? {
+        return firestore.collection(PURCHASE_RECEIPT_PATH).document(receiptId).get().await()
+            .toObject(BuyReceiptResponse::class.java)?.toDomain()
+    }
+
+    fun updateBuyReceipt(receipt: BuyReceipt) {
+        val receiptData = hashMapOf(
+            "amount" to receipt.amount,
+            "date" to receipt.date,
+            "description" to receipt.description,
+            "id" to receipt.idReceipt,
+            "units" to receipt.units,
+            "userId" to receipt.userId
+        )
+        firestore.collection(PURCHASE_RECEIPT_PATH).document(receipt.idReceipt).set(receiptData)
+            .addOnSuccessListener {
+                println("Recibo de Compra actualizado correctamente")
+            }
+            .addOnFailureListener { e ->
+                println("Error al actualizar el Recibo: $e")
+            }
+    }
+
+    fun deleteBuyReceipt(receipt: BuyReceipt) {
+        firestore.collection(PURCHASE_RECEIPT_PATH).document(receipt.idReceipt).delete()
+            .addOnSuccessListener {
+                println("Recibo con ID ${receipt.idReceipt} eliminado correctamente")
+            }
+            .addOnFailureListener { e ->
+                println("Error al eliminar el recibo: $e")
+            }
+    }
+
 }

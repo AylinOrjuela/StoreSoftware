@@ -3,16 +3,16 @@ package com.example.storesoftware.data.response
 import com.example.storesoftware.domain.model.BuyReceipt
 
 data class BuyReceiptResponse (
-    var idReceipt:String = "",
-    var userId:String = "",
+    var amount:String = "",
     var date:String = "",
     var description:String = "",
+    var id:String = "",
     var units: String = "",
-    var amount:String = ""
+    var userId:String = ""
 ){
     fun toDomain():BuyReceipt{
         return BuyReceipt(
-            idReceipt = idReceipt,
+            idReceipt = id,
             userId = userId,
             date = date,
             description = description,
