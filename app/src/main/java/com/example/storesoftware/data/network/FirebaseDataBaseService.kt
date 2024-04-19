@@ -1,10 +1,12 @@
 package com.example.storesoftware.data.network
 
 import android.net.Uri
+import com.example.storesoftware.data.response.BuyReceiptResponse
 import com.example.storesoftware.data.response.ProductResponse
 import com.example.storesoftware.data.response.StoreResponse
 import com.example.storesoftware.data.response.TopProductsResponse
 import com.example.storesoftware.data.response.UserResponse
+import com.example.storesoftware.domain.model.BuyReceipt
 import com.example.storesoftware.domain.model.Product
 import com.example.storesoftware.domain.model.Store
 import com.example.storesoftware.domain.model.User
@@ -34,6 +36,7 @@ class FirebaseDataBaseService @Inject constructor(
         const val MANAGEMENT_PATH = "management"
         const val TOP_PRODUCT_DOCUMENT = "top_products"
         const val SALE_PATH = "sale"
+        const val PURCHASE_RECEIPT_PATH = "Purchase"
     }
 
     suspend fun getAllProducts(): List<Product> {
@@ -314,14 +317,64 @@ class FirebaseDataBaseService @Inject constructor(
         firestore.collection(SALE_PATH).document(id).set(SALE)
     }
 
-
-
     private fun generateSaleId(): String {
         return Date().time.toString()
     }
 
     private fun generatedate(): String {
         return Date().toString()
+    }
+    
+    fun createPurchaseReceipt (receipt: BuyReceipt) {
+
+        val receiptData = hashMapOf(
+            "id" to receipt.idReceipt,
+            "userId" to receipt.userId,
+            "date" to receipt.date,
+            "description" to receipt.description,
+            "units" to receipt.units,
+            "amount" to receipt.amount,
+        )
+        firestore.collection(PURCHASE_RECEIPT_PATH).document(receipt.idReceipt).set(receiptData)
+    }
+
+    suspend fun getListBuyReceipts(): List<BuyReceipt> {
+        return firestore.collection(PURCHASE_RECEIPT_PATH).get().await().map { buyReceipt ->
+            buyReceipt.toObject(BuyReceiptResponse::class.java).toDomain()
+        }
+    }
+
+    suspend fun getBuyReceiptById(receiptId: String): BuyReceipt? {
+        return firestore.collection(PURCHASE_RECEIPT_PATH).document(receiptId).get().await()
+            .toObject(BuyReceiptResponse::class.java)?.toDomain()
+    }
+
+    fun updateBuyReceipt(receipt: BuyReceipt) {
+        val receiptData = hashMapOf(
+            "amount" to receipt.amount,
+            "date" to receipt.date,
+            "description" to receipt.description,
+            "id" to receipt.idReceipt,
+            "units" to receipt.units,
+            "userId" to receipt.userId
+        )
+        firestore.collection(PURCHASE_RECEIPT_PATH).document(receipt.idReceipt).set(receiptData)
+            .addOnSuccessListener {
+                println("Recibo de Compra actualizado correctamente")
+            }
+            .addOnFailureListener { e ->
+                println("Error al actualizar el Recibo: $e")
+            }
+    }
+
+    fun deleteBuyReceipt(receipt: BuyReceipt) {
+        firestore.collection(PURCHASE_RECEIPT_PATH).document(receipt.idReceipt).delete()
+            .addOnSuccessListener {
+                println("Recibo con ID ${receipt.idReceipt} eliminado correctamente")
+            }
+            .addOnFailureListener { e ->
+                println("Error al eliminar el recibo: $e")
+            }
     }
 
 }

@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundApp_darkTheme"
-    android:gravity="center"
     android:orientation="vertical"
-    android:padding="15dp"
-    tools:context=".ui.shopping.Register.CreatePurchasesActivity">
+    android:gravity="center"
+    android:padding="10dp"
+    android:background="@color/backgroundApp_darkTheme"
+    tools:context=".ui.shopping.editDelete.EditDeleteBuyReceiptActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="5dp"
-        android:text="@string/title_register_purchase_receipt"
+        android:text="EDITAR RECIBO DE COMPRA"
         android:textAlignment="center"
         android:textColor="@color/textColor_darkTheme"
         android:textSize="30sp"
@@ -115,16 +115,29 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnCreatePurchaseReceipt"
+        android:id="@+id/btnSaveChanges"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="6dp"
         android:backgroundTint="@color/backgroundButton_neutral_darkTheme"
-        android:text="@string/button_register_purchase_receipt"
+        android:text="Guardar cambios"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:cornerRadius="5dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:backgroundTint="@color/backgroundButton_delete_darkTheme"
+        android:text="Eliminar"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:cornerRadius="5dp" />
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnBack"

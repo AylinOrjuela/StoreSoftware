@@ -25,6 +25,15 @@
             android:name=".ui.sale.consultReceiptSale.ConsultReceiptSaleActivity"
             android:exported="false"/>
         <activity
+            android:name=".ui.shopping.editDelete.EditDeleteBuyReceiptActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.shopping.Details.PurchaseReceiptDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.shopping.Consult.ConsultPurchaseReceiptsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.product.editDeleteProduct.DeleteEditProductActivity"
             android:exported="false" />
         <activity
@@ -46,7 +55,7 @@
             android:name=".ui.Store.RegisterStoreActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.shopping.CreatePurchasesActivity"
+            android:name=".ui.shopping.Register.CreatePurchasesActivity"
             android:exported="false" />
         <activity
             android:name=".ui.sale.addReceiptSale.CreateSaleActivity"
