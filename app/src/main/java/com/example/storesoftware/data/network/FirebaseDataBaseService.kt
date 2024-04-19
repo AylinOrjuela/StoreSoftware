@@ -33,6 +33,7 @@ class FirebaseDataBaseService @Inject constructor(
         const val PRODUCTS_PATH = "products"
         const val MANAGEMENT_PATH = "management"
         const val TOP_PRODUCT_DOCUMENT = "top_products"
+        const val SALE_PATH = "sale"
     }
 
     suspend fun getAllProducts(): List<Product> {
@@ -290,6 +291,37 @@ class FirebaseDataBaseService @Inject constructor(
             .addOnFailureListener { e ->
                 println("Error al eliminar el usuario: $e")
             }
+    }
+
+    fun uploadNewSale(
+        name: String,
+        description: String,
+        amount: Int,
+        totalPrice: String
+    ) {
+        val id = generateSaleId()
+        val date = generatedate()
+
+        val SALE = hashMapOf(
+            "id" to id,
+            "name" to name,
+            "date" to date,
+            "description" to description,
+            "amount" to amount,
+            "totalPrice" to totalPrice
+        )
+
+        firestore.collection(SALE_PATH).document(id).set(SALE)
+    }
+
+
+
+    private fun generateSaleId(): String {
+        return Date().time.toString()
+    }
+
+    private fun generatedate(): String {
+        return Date().toString()
     }
 
 }
