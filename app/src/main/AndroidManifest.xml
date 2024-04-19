@@ -16,6 +16,15 @@
         android:theme="@style/Theme.StoreSoftware"
         tools:targetApi="31">
         <activity
+            android:name=".ui.sale.addReceiptSale.SelectProductSaleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.sale.editDeleteSale.EditDeleteSaleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.sale.consultReceiptSale.ConsultReceiptSaleActivity"
+            android:exported="false"/>
+        <activity
             android:name=".ui.shopping.editDelete.EditDeleteBuyReceiptActivity"
             android:exported="false" />
         <activity
@@ -49,7 +58,7 @@
             android:name=".ui.shopping.Register.CreatePurchasesActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.sale.CreateSaleActivity"
+            android:name=".ui.sale.addReceiptSale.CreateSaleActivity"
             android:exported="false" />
         <activity
             android:name=".ui.product.addproduct.CreateProductActivity"

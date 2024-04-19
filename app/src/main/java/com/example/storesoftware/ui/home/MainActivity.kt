@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.storesoftware.databinding.ActivityMainBinding
 import com.example.storesoftware.ui.product.HomeProduct.MainProductActivity
+import com.example.storesoftware.ui.sale.consultReceiptSale.ConsultReceiptSaleActivity
 import com.example.storesoftware.ui.shopping.Consult.ConsultPurchaseReceiptsActivity
 import com.example.storesoftware.ui.user.ConsultUserActivity
 import com.example.storesoftware.ui.user.LogInActivity
@@ -48,6 +49,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, LogInActivity::class.java)
             startActivity(intent)
             finish()
+        }
+        
+        binding.btnSale.setOnClickListener {
+            val intent = Intent(this, ConsultReceiptSaleActivity::class.java)
         }
 
         binding.btnShopping.setOnClickListener {
