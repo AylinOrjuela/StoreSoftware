@@ -53,6 +53,9 @@ class MainActivity : AppCompatActivity() {
         
         binding.btnSale.setOnClickListener {
             val intent = Intent(this, ConsultReceiptSaleActivity::class.java)
+            intent.putExtra("userId", user)
+            startActivity(intent)
+            finish()
         }
 
         binding.btnShopping.setOnClickListener {

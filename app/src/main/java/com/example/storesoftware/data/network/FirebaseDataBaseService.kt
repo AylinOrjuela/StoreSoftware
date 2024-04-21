@@ -3,11 +3,13 @@ package com.example.storesoftware.data.network
 import android.net.Uri
 import com.example.storesoftware.data.response.BuyReceiptResponse
 import com.example.storesoftware.data.response.ProductResponse
+import com.example.storesoftware.data.response.SaleResponse
 import com.example.storesoftware.data.response.StoreResponse
 import com.example.storesoftware.data.response.TopProductsResponse
 import com.example.storesoftware.data.response.UserResponse
 import com.example.storesoftware.domain.model.BuyReceipt
 import com.example.storesoftware.domain.model.Product
+import com.example.storesoftware.domain.model.Sale
 import com.example.storesoftware.domain.model.Store
 import com.example.storesoftware.domain.model.User
 import com.google.firebase.firestore.FirebaseFirestore
@@ -19,6 +21,7 @@ import com.google.firebase.storage.ktx.storageMetadata
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.tasks.await
+import java.text.SimpleDateFormat
 import java.util.Date
 import javax.inject.Inject
 import kotlin.coroutines.resume
@@ -316,13 +319,55 @@ class FirebaseDataBaseService @Inject constructor(
 
         firestore.collection(SALE_PATH).document(id).set(SALE)
     }
+    suspend fun getSaleReceiptById(receiptId: String): Sale? {
+        return firestore.collection(SALE_PATH).document(receiptId).get().await()
+            .toObject(SaleResponse::class.java)?.toDomain()
+    }
+
+    suspend fun getListSaleReceipts(): List<Sale> {
+        return firestore.collection(SALE_PATH).get().await().map { saleReceipt ->
+            saleReceipt.toObject(SaleResponse::class.java).toDomain()
+        }
+    }
+
+    fun updateSaleReceipt(receipt: Sale) {
+        val receiptData = hashMapOf(
+            "id" to receipt.id,
+            "name" to receipt.name,
+            "date" to receipt.date,
+            "description" to receipt.description,
+            "amount" to receipt.amount,
+            "totalPrice" to receipt.totalPrice
+        )
+        firestore.collection(SALE_PATH).document(receipt.id).set(receiptData)
+            .addOnSuccessListener {
+                println("Recibo de Compra actualizado correctamente")
+            }
+            .addOnFailureListener { e ->
+                println("Error al actualizar el Recibo: $e")
+            }
+    }
+
+    fun deleteSaleReceipt(receipt: String?) {
+        if (receipt != null) {
+            firestore.collection(SALE_PATH).document(receipt).delete()
+                .addOnSuccessListener {
+                    println("Recibo con ID ${receipt} eliminado correctamente")
+                }
+                .addOnFailureListener { e ->
+                    println("Error al eliminar el recibo: $e")
+                }
+        }
+    }
 
     private fun generateSaleId(): String {
         return Date().time.toString()
     }
 
     private fun generatedate(): String {
-        return Date().toString()
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy")
+        val date = Date()
+        return dateFormat.format(date)
     }
     
     fun createPurchaseReceipt (receipt: BuyReceipt) {
@@ -376,5 +421,8 @@ class FirebaseDataBaseService @Inject constructor(
                 println("Error al eliminar el recibo: $e")
             }
     }
+
+
+
 
 }
